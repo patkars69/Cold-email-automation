@@ -20,10 +20,13 @@ cold_email_pipeline/
 ├── hr_contacts.xlsx # Excel file with all HR contacts (and columns like Status/Reply)
 
 ├── resume/
+
 │ └── Shashwat Patkar Resume.pdf # Your resume, attached automatically to each email
 
 ├── credentials/
+
 │ ├── credentials.json # Your Gmail API OAuth credentials (see setup below)
+
 │ └── token.json # Auto-generated token after first script run
 
 
