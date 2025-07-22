@@ -1,4 +1,6 @@
 Cold Email Automation Pipeline
+
+
 Automate your job search and HR outreach with a robust, Python-powered workflow. This project lets you send engaging, personalized emails (with your resume attached) to hundreds of HR contacts in batches—while logging responses live in Excel and making every interaction count.
 
 🚀 Features
