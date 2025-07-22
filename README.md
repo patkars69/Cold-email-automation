@@ -31,28 +31,103 @@ cold_email_pipeline/
 │ └── token.json # Auto-generated token after first script run
 
 
-## 🔑 About the `credentials` Folder & Google OAuth Setup
+---
 
-### Why Use Your Own Google OAuth API?
+## 🔧 Setup Instructions
 
-For secure, authorized access to your Gmail account, you **must create your own OAuth credentials via Google Cloud**. Never share your credentials files online, and always use your own for privacy.
+### 1. 📄 Prepare Your Files
 
-### How to Obtain and Configure `credentials.json`
+- Fill in your HR contact data in `hr_contacts.xlsx` with these columns:
+Name | Email | Company Name | Personalized Line | Status | Reply
 
-1. Go to the [Google Cloud Console](https://console.cloud.google.com/).  
-2. Create/Open a Project.  
-3. Enable the Gmail API (APIs & Services > Enable APIs and Services > search "Gmail API" > Enable).  
-4. Configure OAuth consent screen (choose External user type and complete minimal setup).  
-5. Create OAuth Client ID (Credentials > Create > OAuth client ID > Desktop app).  
-6. Download the `credentials.json` and place it in the `credentials/` folder in your project.  
-7. On first script run, authenticate with Google in the browser; this will create `token.json` in `credentials/`.
 
-*(continue with the rest of your README content similarly, with clear headings, bullet lists, code blocks, and blank lines)*
+- Place your resume in the `resume/` folder.
 
-### Additional Tips
+- You’ll also need to set up **Google OAuth API** access to use Gmail services.
 
-- Preview your README in GitHub or a Markdown viewer to check formatting before committing.  
-- Use a Markdown editor (Typora, VS Code with Markdown Preview) for easier writing.  
-- If pasting from somewhere that loses formatting, manually fix indentation and blank lines before saving.
+---
 
-If you want, I can also prepare a **Markdown (.md) file** formatted exactly for GitHub so you can copy-paste it directly without losing structure. Just let me know!
+### 2. 🔐 Enable Gmail API & Create `credentials.json`
+
+> **Follow these exact steps to enable Gmail API and get your personal `credentials.json` file:**
+
+#### 🔁 One-Time OAuth Setup
+
+1. Visit the [Google Cloud Console](https://console.cloud.google.com/).
+2. Click **"Select a project"** → then **"New Project"** → name it something like `Cold Email Pipeline`.
+3. After creating the project, search for **“Gmail API”** in the top search bar and **enable** it.
+4. Go to **APIs & Services > Credentials**.
+5. Click **"Create Credentials" → "OAuth client ID"**.
+6. You’ll be prompted to configure the **OAuth Consent Screen**:
+ - Choose **"External"** user type
+ - Fill in **App name**, **email**, etc.
+ - Add **Scopes**: `../auth/gmail.send`, `../auth/gmail.readonly`
+ - Add **Test Users** (your Gmail account)
+7. After saving, under **OAuth Client ID**:
+ - Select **Application type: Desktop App**
+ - Name it and click **Create**
+8. Download the `credentials.json` file and place it in:
+
+   cold_email_pipeline/credentials/credentials.json
+
+
+> ⚠️ Keep this file secure — it contains your private API credentials.
+
+---
+
+### 3. 🛠️ Installation & First Run
+
+From your project root, run:
+
+Bash - 
+
+# Activate virtual environment
+.\venv\Scripts\Activate
+
+# Install required libraries
+pip install pandas openpyxl google-auth google-auth-oauthlib google-api-python-client
+
+# Run the pipeline
+python batched_email_pipeline.py
+
+✅ On first run, a browser window will open asking you to log into your Gmail account and allow access. A token.json file will be generated and reused on future runs.
+
+🧠 How It Works
+Selects today's batch from hr_contacts.xlsx.
+
+Checks for existing replies in your Gmail inbox.
+
+Skips HRs who replied or were already sent an email.
+
+Generates personalized content, attaches your resume, and sends the email.
+
+Logs the result back to Excel (✅ for sent, replied, or skipped).
+
+📈 Example: hr_contacts.xlsx
+Name	Email	Company Name	Personalized Line	Status	Reply
+Jane HR	jane@company.com	ABC Ltd	Impressed by ABC’s AI work	✅	✅
+
+⚙️ Configuration Tips
+Adjust BATCH_SIZE in batched_email_pipeline.py for pacing.
+
+Update your resume easily in resume/ folder.
+
+Re-run the script daily to continue processing pending HRs.
+
+📌 Use Cases
+Job Outreach
+
+Client Acquisition
+
+Conference Invitations
+
+Lead Prospecting Campaigns
+
+👨‍💻 Author
+Shashwat Patkar
+🔗 LinkedIn | ✉️ shashwat.patkar@gmail.com
+Feel free to fork, contribute, and suggest improvements!
+
+
+
+🤝 Contributions Welcome!
