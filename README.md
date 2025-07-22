@@ -15,14 +15,16 @@ Automate your job search and HR outreach with a robust, Python-powered workflow.
 ## 📂 Project Structure
 
 cold_email_pipeline/
-├── batched_email_pipeline.py # Main batch sending & reply-check script
-├── hr_contacts.xlsx # Contact tracker: all HRs & statuses
+├── batched_email_pipeline.py # Main script to batch-send emails & log replies
+
+├── hr_contacts.xlsx # Excel file with all HR contacts (and columns like Status/Reply)
+
 ├── resume/
-│ └── Shashwat Patkar Resume.pdf # Your resume for attachment
+│ └── Shashwat Patkar Resume.pdf # Your resume, attached automatically to each email
+
 ├── credentials/
-│ ├── credentials.json # Your own Google OAuth API file (instructions below)
-│ └── token.json # Generated automatically on first run
-├── venv/ # Python virtual environment (not version controlled)
+│ ├── credentials.json # Your Gmail API OAuth credentials (see setup below)
+│ └── token.json # Auto-generated token after first script run
 
 
 ## 🔑 About the `credentials` Folder & Google OAuth Setup
