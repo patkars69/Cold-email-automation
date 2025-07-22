@@ -15,6 +15,7 @@ Automate your job search and HR outreach with a robust, Python-powered workflow.
 ## 📂 Project Structure
 
 cold_email_pipeline/
+
 ├── batched_email_pipeline.py # Main script to batch-send emails & log replies
 
 ├── hr_contacts.xlsx # Excel file with all HR contacts (and columns like Status/Reply)
